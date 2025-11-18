@@ -38,12 +38,11 @@
   .excellent{color:var(--good);}
   .good{color:var(--ok);}
   .tryagain{color:var(--bad);}
-  @keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);opacity:1;}}
-  .fade-in{animation:fadeIn 0.6s ease-in;}
 </style>
 </head>
 <body>
-  <div class="app">
+
+<div class="app">
     <h1>Take Home Assignment</h1>
     <p class="muted" style="text-align:center;">Answer true or false, and learn why.</p>
 
@@ -72,7 +71,7 @@
       </div>
     </div>
 
-    <div id="summary" class="fade-in">
+    <div id="summary">
       <h2>Quiz Complete 🎉</h2>
       <p id="scoreText"></p>
       <div id="rating"></div>
@@ -81,49 +80,50 @@
     </div>
 
     <div class="footer">Results automatically saved to Google Sheet (admin only)</div>
-  </div>
+</div>
 
 <script>
+
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbwUsuf9SESCtU-UgWBCFDsk94MQfdVu6EnEga4RAkb5XmK_xRGCjC6xnIvEqL-3S2Gt/exec";
 
 const questions = [
-  {q:"If a celebrity posted information about the world, it's 100% real and can be trusted.", a:false, e:"What celebrities post may not always be true; they can also be used to spread misinformation."},
-  {q:"Fake news can spread faster than real news.", a:true, e:"People often believe shocking fake news quickly and share it without checking."},
-  {q:"Every piece of information online is trustworthy.", a:false, e:"People or bots can create fake news using editing tools or AI."},
-  {q:"You should always check the source before spreading information.", a:true, e:"You should always verify information so you don’t accidentally spread fake news."},
-  {q:"If a post has many likes and comments, it's guaranteed to be real.", a:false, e:"Popularity does not guarantee truth."},
-  {q:"If a post includes real pictures, it must be real.", a:false, e:"Pictures can be edited or taken out of context."},
-  {q:"Fake videos or pictures are impossible to detect.", a:false, e:"Fakes can often be spotted through unnatural movement, lighting, or background issues."},
-  {q:"It’s okay to share an article without reading it, as long as the title sounds true.", a:false, e:"Headlines can be misleading — always read the full text before sharing."},
-  {q:"Bots or fake accounts can help spread fake news.", a:true, e:"Fake accounts can be programmed to spread misleading information quickly."},
-  {q:"Images and videos on social media are always reliable evidence.", a:false, e:"Nowadays, AI tools can create fake images and videos that look real."}
+  {q:"If a celebrity posted information about the world, it's 100% real and can be trusted.",a:false,e:"What celebrities post may not always be true; they can also be used to spread misinformation."},
+  {q:"Fake news can spread faster than real news.",a:true,e:"People often believe shocking fake news quickly and share it without checking."},
+  {q:"Every piece of information online is trustworthy.",a:false,e:"People or bots can create fake news using editing tools or AI."},
+  {q:"You should always check the source before spreading information.",a:true,e:"You should always verify information so you don’t accidentally spread fake news."},
+  {q:"If a post has many likes and comments, it's guaranteed to be real.",a:false,e:"Popularity does not guarantee truth."},
+  {q:"If a post includes real pictures, it must be real.",a:false,e:"Pictures can be edited or taken out of context."},
+  {q:"Fake videos or pictures are impossible to detect.",a:false,e:"Fakes can often be spotted through unnatural movement, lighting, or background issues."},
+  {q:"It’s okay to share an article without reading it, as long as the title sounds true.",a:false,e:"Headlines can be misleading — always read the full article before sharing."},
+  {q:"Bots or fake accounts can help spread fake news.",a:true,e:"Fake accounts can be programmed to spread misleading information quickly."},
+  {q:"Images and videos on social media are always reliable evidence.",a:false,e:"Nowadays, AI tools can create fake images and videos that look real."}
 ];
 
-let idx = 0, score = 0, userName = "", userAnswers = [];
+let idx=0, score=0, userName="", userAnswers=[];
 
-const qEl = document.getElementById('question');
-const feedback = document.getElementById('feedback');
-const btnT = document.getElementById('btnTrue');
-const btnF = document.getElementById('btnFalse');
-const nextBtn = document.getElementById('nextBtn');
-const summary = document.getElementById('summary');
-const scoreText = document.getElementById('scoreText');
-const ratingEl = document.getElementById('rating');
-const restartBtn = document.getElementById('restartBtn');
-const quizArea = document.getElementById('quizArea');
-const progressBar = document.getElementById('progressBar');
-const progressText = document.getElementById('progressText');
-const namePrompt = document.getElementById('namePrompt');
-const progressSection = document.getElementById('progressSection');
-const saveStatus = document.getElementById('saveStatus');
-const startBtn = document.getElementById('startBtn');
+const qEl = document.getElementById("question");
+const feedback = document.getElementById("feedback");
+const btnT = document.getElementById("btnTrue");
+const btnF = document.getElementById("btnFalse");
+const nextBtn = document.getElementById("nextBtn");
+const summary = document.getElementById("summary");
+const scoreText = document.getElementById("scoreText");
+const ratingEl = document.getElementById("rating");
+const restartBtn = document.getElementById("restartBtn");
+const quizArea = document.getElementById("quizArea");
+const progressBar = document.getElementById("progressBar");
+const progressText = document.getElementById("progressText");
+const namePrompt = document.getElementById("namePrompt");
+const progressSection = document.getElementById("progressSection");
+const saveStatus = document.getElementById("saveStatus");
+const startBtn = document.getElementById("startBtn");
 
 startBtn.onclick = () => {
-  userName = document.getElementById('userName').value.trim();
+  userName = document.getElementById("userName").value.trim();
   if(!userName) return alert("Please enter your name first.");
-  namePrompt.classList.add('hidden');
-  quizArea.classList.remove('hidden');
-  progressSection.classList.remove('hidden');
+  namePrompt.classList.add("hidden");
+  quizArea.classList.remove("hidden");
+  progressSection.classList.remove("hidden");
   renderQuestion();
 };
 
@@ -137,7 +137,7 @@ function renderQuestion(){
 }
 
 function updateProgress(){
-  const percent = ((idx)/questions.length)*100;
+  const percent = (idx/questions.length)*100;
   progressBar.style.width = percent + "%";
   progressText.textContent = `Question ${idx+1} of ${questions.length}`;
 }
@@ -155,46 +155,47 @@ function answer(isTrue){
 
 function next(){
   idx++;
-  if(idx>=questions.length){
+  if(idx >= questions.length){
     progressBar.style.width = "100%";
     showSummary();
-  }else renderQuestion();
+  } else renderQuestion();
 }
 
 function showSummary(){
-  quizArea.style.display = "none";
-  summary.style.display = "block";
+  quizArea.style.display="none";
+  summary.style.display="block";
   const percent = Math.round((score/questions.length)*100);
   scoreText.textContent = `${userName}, you scored ${score} out of ${questions.length} (${percent}%)`;
-  let rating="";
-  if(percent>=80){rating="Excellent work! 🌟";ratingEl.className="excellent";}
-  else if(percent>=50){rating="Good effort! 👍";ratingEl.className="good";}
-  else{rating="Try again — you’ll get it! 💪";ratingEl.className="tryagain";}
-  ratingEl.textContent = rating;
-  progressText.textContent = "Quiz Completed 🎉";
 
-  // Send results to Google Sheet
-  fetch(SHEET_URL, {
-    method: "POST",
-    headers: {"Content-Type":"application/json"},
-    body: JSON.stringify({
-      name: userName,
-      score: score,
-      total: questions.length,
-      percent: percent,
-      answers: userAnswers
+  if(percent >= 80){
+    ratingEl.textContent = "Excellent work! 🌟";
+    ratingEl.className = "excellent";
+  } else if(percent >= 50){
+    ratingEl.textContent = "Good effort! 👍";
+    ratingEl.className = "good";
+  } else {
+    ratingEl.textContent = "Try again — you’ve got this! 💪";
+    ratingEl.className = "tryagain";
+  }
+
+  fetch(SHEET_URL,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      name:userName,
+      score:score,
+      total:questions.length,
+      percent:percent,
+      answers:userAnswers
     })
   })
-  .then(res => res.json())
-  .then(d => saveStatus.textContent = "✅ Result saved to Google Sheet")
-  .catch(err => {
-    console.error(err);
-    saveStatus.textContent = "⚠️ Could not save result. Please check your Google Script settings.";
-  });
+  .then(r=>r.json())
+  .then(()=> saveStatus.textContent="✅ Result saved to Google Sheet")
+  .catch(()=> saveStatus.textContent="⚠️ Could not save result.");
 }
 
 function restartQuiz(){
-  idx=0;score=0;userAnswers=[];
+  idx=0; score=0; userAnswers=[];
   summary.style.display="none";
   quizArea.style.display="block";
   renderQuestion();
@@ -204,6 +205,8 @@ btnT.onclick=()=>answer(true);
 btnF.onclick=()=>answer(false);
 nextBtn.onclick=next;
 restartBtn.onclick=restartQuiz;
+
 </script>
+
 </body>
 </html>

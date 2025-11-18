@@ -87,16 +87,16 @@
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbwUsuf9SESCtU-UgWBCFDsk94MQfdVu6EnEga4RAkb5XmK_xRGCjC6xnIvEqL-3S2Gt/exec";
 
 const questions = [
-  {q:"If a celebrity posted information about the world, its 100% real and can be trusted.",a:false,e:"what celebrities posted sometimes might not be entirely true or trusted, it could be fake news thats given for them to spread."},
-  {q:"fake news could spread faster then real news.",a:true,e:"people often gets manipulated by fake news and often thinks its real so they spread it to their friends or family almost instantly."},
-  {q:"Every information online is trusted.",a:false,e:"people or bots could spread fake news by using photo shops or AI."},
-  {q:"You should always check the source of the information you get before spreading the information to your friends and family.",a:true,e:"ou should always check if the information you get is true, so you do not accidentally spread fake news to others."},
-  {q:"If a post has many likes and comments, its garunteed to be real and trusted.",a:false,e:"Popularity doesnt not mean that its garunteed to be trusted and real."},
-  {q:"if post includes real pictures, it must be real..",a:false,e:"the pictures only help you visualise the situation, they could be telling a whole different story from just one picture.."},
-  {q:"fake videos or pictures are impossible to detect.",a:false,e:"fakes can often be detected by analyzing unnatural movemments, environment or lighting."},
-  {q:""It’s okay to share an article without reading the body of text, iF the title sounds true its okay to spread the information.",a:false,e:"Headlines can be misleading always read the main text where all the information is given out before sharing"},
-  {q:"Bots or fake accounts could help spread fake news.",a:true,e:"people could create chaos by simply programming fake acounts to spread out information thats either real or fake."},
-  {q:"mages and videos on social media are always trusted or reliable evidence.",a:false,e:""now days people uses AI to create proof for fake news, so it seems trusted and real"}
+  {q:"If a celebrity posted information about the world, it's 100% real and can be trusted.", a:false, e:"What celebrities post may not always be true; they can also be used to spread misinformation."},
+  {q:"Fake news can spread faster than real news.", a:true, e:"People often believe shocking fake news quickly and share it without checking."},
+  {q:"Every piece of information online is trustworthy.", a:false, e:"People or bots can create fake news using editing tools or AI."},
+  {q:"You should always check the source before spreading information.", a:true, e:"You should always verify information so you don’t accidentally spread fake news."},
+  {q:"If a post has many likes and comments, it's guaranteed to be real.", a:false, e:"Popularity does not guarantee truth."},
+  {q:"If a post includes real pictures, it must be real.", a:false, e:"Pictures can be edited or taken out of context."},
+  {q:"Fake videos or pictures are impossible to detect.", a:false, e:"Fakes can often be spotted through unnatural movement, lighting, or background issues."},
+  {q:"It’s okay to share an article without reading it, as long as the title sounds true.", a:false, e:"Headlines can be misleading — always read the full text before sharing."},
+  {q:"Bots or fake accounts can help spread fake news.", a:true, e:"Fake accounts can be programmed to spread misleading information quickly."},
+  {q:"Images and videos on social media are always reliable evidence.", a:false, e:"Nowadays, AI tools can create fake images and videos that look real."}
 ];
 
 let idx = 0, score = 0, userName = "", userAnswers = [];
